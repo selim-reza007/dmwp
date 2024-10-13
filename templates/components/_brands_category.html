@@ -1,0 +1,33 @@
+
+
+
+{% comment %} category by Brands {% endcomment %}
+<section class="product-brand my-0 p-5 rounded-3">
+  <div class="container">
+    <div class="row">
+      <h2 class="display-6 fw-normal text-success brands text-center">Available Brands</h2>
+    </div>
+
+    <div class="row">
+      {% if brands %}
+        <div class="row row-cols-2 row-cols-md-4 g-4 justify-content-center">
+          {% for brand in brands %}
+            <div class="col brand-card">
+              <div class="card text-center">
+                <a href="{% url 'products:by-brand' id=brand.id %}">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ brand.brandName }}</h5>
+                  </div>
+                </a>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p class="display-3 text-danger text-center">No brand data!</p>
+      {% endif %}
+    </div>
+    
+  </div>
+</section>
+

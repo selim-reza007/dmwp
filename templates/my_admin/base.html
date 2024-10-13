@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %} - dmwp</title>
+    <link rel="icon" href="{{ MEDIA_URL }}favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body class="admin-body">
+
+  <div class="container-fluid px-0 position-relative">
+    <div class="d-flex l-sidebar-h bg-light">
+      <!-- Sidebar -->
+      <div class="sidebar col-4 col-md-3 col-xl-2 bg-dark px-4 pt-3 position-fixed top-0 start-0">
+        <p class="h4 text-light text-wrap">Admin Pannel</p>
+        <hr class="text-light px-1">
+        <ul class="ul-list text-white list-unstyled">
+          <li class="my-2"><a class="sidebar-link {% if request.path == "/dashboard/" %}active{% endif %}" href="{% url 'dashboard' %}">Dashboard</a></li>
+          <li class="my-2"><a class="sidebar-link {% if 'brand' in request.path %}active{% endif %}" href="{% url 'brand:brand-list' %}">Brands</a></li>
+          <li class="my-2"><a class="sidebar-link {% if 'products' in request.path %}active {% endif %}" href="{% url 'products:list-product' %}">Products</a></li>
+          <li class="my-2"><a class="sidebar-link{% if 'gallery' in request.path %} active{% endif %}" href="{% url 'gallary:dasboard-gallery' %}">Gallery</a></li>
+          <li class="my-2"><a class="sidebar-link {% if 'messages' in request.path %}active{% endif %}" href="{% url 'contactus:requested-msg' %}">Messages</a></li>
+          <li class="mt-5">
+            <form action="{% url 'user:user-logout' %}" method="post">
+              {% csrf_token %}
+              <button class="btn btn-danger"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+            </form>
+          </li>
+        </ul>
+      </div>
+      
+      <!-- Main Content Area -->
+      <div class="content col-8 col-md-9 col-xl-10 pt-2 position-absolute top-0 end-0 px-3">
+        {% block content %}{% endblock content %}
+      </div>
+    </div>    
+  </div>
+
+  <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

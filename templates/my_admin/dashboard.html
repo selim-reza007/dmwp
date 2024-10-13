@@ -1,0 +1,70 @@
+{% extends "my_admin/base.html" %}
+
+{% block title %}Dashboard{% endblock title %}
+
+{% block content %}
+<div class="mb-5">
+  <p class="h2 bg-success text-white text-center py-2 rounded mb-3">Dashboard</p>
+  
+  {% if messages %}
+  <ul class="alert alert-success list-unstyled alert-dismissible fade show" role="alert">
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </ul>
+  {% endif %}
+  <!-- Example Dashboard Stats -->
+  <div class="row">
+  
+    <div class="col-auto mb-3">
+      <div class="card text-white bg-primary">
+        <a href="{% url 'contactus:requested-msg' %}" class="card-body position-relative text-white">
+          New Messages
+          <span class="card-text badge bg-danger position-absolute top-0 start-100 translate-middle rounded-pill">
+            {{ count }}
+          </span>
+        </a>
+      </div>
+    </div>
+  
+  </div>
+
+  {% if profileInfo %}
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header">
+            <p class="h3 text-center">Company Information:</p>
+          </div>
+          <div class="card-body">
+            
+            <div class="border-bottom">
+              <p class="lead mb-0">Mobile Number</p>
+              <p>{{ profileInfo.mobile }}</p>
+            </div>
+            <div class="border-bottom">
+              <p class="lead mb-0">Email</p>
+              <p>{{ profileInfo.email }}</p>
+            </div>
+            <div class="">
+              <p class="lead mb-0">Company CV</p>
+              <a href="{{ profileInfo.profile.url }}">Click here <i class="fa-solid fa-download"></i></a>
+            </div>
+  
+          </div>
+          <div class="card-footer">
+            <a href="{% url 'aboutus:edit-info' id=profileInfo.id %}" class="d-inline-block btn btn-primary">Click to change info</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% else %}
+    <p class="display-3 text-danger">You haven't added company profile yet!</p>
+    <a href="{% url 'aboutus:add-info' %}" class="d-inline-block btn btn-primary">Add company Profile</a>
+  {% endif %}
+
+  <a class="btn btn-warning mt-3" href="{% url 'user:change_password' %}">Change password</a>
+
+</div>
+{% endblock content %}

@@ -1,0 +1,35 @@
+{% extends "my_admin\base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Add new Product
+{% endblock title %}
+
+{% block content %}
+    <div class="">
+        <p class="h2 bg-success text-white text-center py-2 rounded mb-3">
+            {% if request.path == '/products/dashboard/add/' %}
+            Add new Product
+            {% else %}
+            Edit Product
+            {% endif %}
+        </p>
+
+        <div class="col-md-6 pb-3">
+            <form method="post" class="" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <div class="col">
+                    <button class="btn btn-primary mt-0"><i class="fa-solid fa-floppy-disk"></i> 
+                        {% if request.path == '/products/dashboard/add/' %}
+                            Save
+                        {% else %}
+                            Update
+                        {% endif %}
+                    </button>
+                    <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-warning"><i class="fa-solid fa-ban"></i> Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock content %}
