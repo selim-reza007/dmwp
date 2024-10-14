@@ -12,11 +12,13 @@ Run the command: python -m venv venv
 
 step 3: Activate the virtual environment. venv/Scripts/activate  
 
-step 4: got to project folder(dmwp).  
+step 4: install dependencies  
+run command: pip install -r requirements.txt
 
+step 5: got to project folder(dmwp).  
 Run command: cd../.. and cd dwmp  
-step 5: run the project  
 
+step 6: run the project  
 run command: python manage.py runserver  
 
 **credentials**  
